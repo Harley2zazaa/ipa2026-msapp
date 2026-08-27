@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask import request
 from flask import render_template
@@ -7,6 +8,10 @@ from pymongo import MongoClient
 from bson import ObjectId
 
 app = Flask(__name__)
+
+mongo_uri  = os.environ.get("MONGO_URI")
+db_name    = os.environ.get("DB_NAME")
+
 client = MongoClient("mongodb://mongo:27017/")
 mydb = client["ipa2026"]
 mycol = mydb["router"]
@@ -38,7 +43,6 @@ def delete_comment():
     ip = request.form.get("ip")
     
     if ip:
-        # ลบ Document ที่มี ip ตรงกัน ออกจาก MongoDB
         mycol.delete_one({"ip": ip})
         
     return redirect("/")
