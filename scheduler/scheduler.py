@@ -1,6 +1,8 @@
 import time, pika
 
+from bson import json_util
 from producer import produce
+from database import get_router_info
 
 
 def scheduler():
@@ -12,12 +14,14 @@ def scheduler():
     while True:
         now = time.time()
         now_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(now))
-        ms = int((now % 1) * 1000)
+        ms = int((now % 1) * 1000)  
         now_str_with_ms = f"{now_str}.{ms:03d}"
         print(f"[{now_str_with_ms}] run #{count}")
 
         try:
-            produce("localhost", "192.168.1.44")
+            for data in get_router_info():
+                body_bytes = json_util.dumps(data).encode("utf-8")
+                produce("localhost", body_bytes)
         except Exception as e:
             print(e)
             time.sleep(3)
