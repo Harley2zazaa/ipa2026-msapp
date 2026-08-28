@@ -9,11 +9,10 @@ def get_router_info():
 
     client = MongoClient(mongo_uri)
     db = client[db_name]
-    routers = db["routers"]
+    routers = db["router"]
 
     router_data = routers.find()
     return router_data
-
 
 if __name__=='__main__':
     get_router_info()

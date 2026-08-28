@@ -6,4 +6,4 @@ COPY ./database.py /home/myapp/
 COPY ./producer.py /home/myapp/
 COPY ./scheduler.py /home/myapp/
 
-CMD ["python", "/home/myapp/scheduler.py"]
+CMD ["python","-u", "/home/myapp/scheduler.py"]
