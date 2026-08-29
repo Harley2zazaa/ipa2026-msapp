@@ -4,8 +4,7 @@ from bson import json_util
 from producer import consume
 from database import get_interface, save_result
 
-QUEUE_NAME = "router_jobs"
-
+QUEUE_NAME = "router_jobs" #<-- ใส่ให้ตรงกะที่ตั้งใน producer ของ scheduler.py
 
 def callback(ch, method, properties, body):
     try:
@@ -14,12 +13,12 @@ def callback(ch, method, properties, body):
         username = job.get("username")
         password = job.get("password")
 
-        print(f"[worker1] Received job for {ip}")
+        print(f"[worker1] Received job for router {ip}")
 
-        result = run_show_ip_interface_brief(ip, username, password)
+        result = get_interface(ip, username, password)
         save_result(ip, result)
-
-        print(f"[worker1] Saved result for {ip} to MongoDB")
+        print(result)
+        print(f"[worker1] Stored interface status for {ip}")
         ch.basic_ack(delivery_tag=method.delivery_tag)
     except Exception as e:
         print(f"[worker1] Error processing job: {e}")

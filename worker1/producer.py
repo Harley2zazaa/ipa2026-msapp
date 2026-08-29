@@ -14,7 +14,7 @@ def consume(rabbitmq_host, queue_name, callback):
         try:
             connection = pika.BlockingConnection(parameters)
         except pika.exceptions.AMQPConnectionError:
-            print("[worker1] Waiting for RabbitMQ...")
+            print("[worker1] Connecting to RabbitMQ....")
             time.sleep(3)
 
     channel = connection.channel()
@@ -22,7 +22,6 @@ def consume(rabbitmq_host, queue_name, callback):
     channel.basic_qos(prefetch_count=1)
     channel.basic_consume(queue=queue_name, on_message_callback=callback)
 
-    print("[worker1] Waiting for messages...")
     try:
         channel.start_consuming()
     except KeyboardInterrupt:
