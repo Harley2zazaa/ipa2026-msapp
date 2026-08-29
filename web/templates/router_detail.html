@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Router Detail</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <h1>Router: {{ ip }}</h1>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Interface</th>
+                <th>IP Address</th>
+                <th>Status</th>
+                <th>Protocol</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doc in history %}
+                {% for intf in doc.result %}
+                <tr>
+                    <td>{{ doc.timestamp }}</td>
+                    <td>{{ intf.interface }}</td>
+                    <td>{{ intf.ip_address }}</td>
+                    <td>{{ intf.status }}</td>
+                    <td>{{ intf.proto }}</td>
+                </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

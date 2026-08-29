@@ -15,7 +15,7 @@ db_name = os.environ.get("DB_NAME", "ipa2026")
 client = MongoClient(mongo_uri)
 mydb = client[db_name]
 mycol = mydb["router"]
-
+status_col = mydb["interface_results"]
 data = []
 
 @app.route("/")
@@ -46,6 +46,11 @@ def delete_comment():
         mycol.delete_one({"ip": ip})
         
     return redirect("/")
+
+@app.route("/router/<ip>")
+def router_detail(ip):
+    history = list(status_col.find({"ip": ip}))
+    return render_template("router_detail.html", ip=ip, history=history)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
