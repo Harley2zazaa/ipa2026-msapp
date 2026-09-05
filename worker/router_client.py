@@ -1,5 +1,6 @@
 from netmiko import ConnectHandler
 import ntc_templates, os, json
+from database import save_interface_status
 
 def get_interfaces(ip, username, password):
 
@@ -19,6 +20,7 @@ def get_interfaces(ip, username, password):
         result = conn.send_command("show ip int br", use_textfsm=True)
         conn.disconnect()
 
+    save_interface_status(ip, result)
     print(json.dumps(result, indent=2))
 
 

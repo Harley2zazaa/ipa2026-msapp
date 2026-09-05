@@ -2,7 +2,8 @@ FROM python
 WORKDIR /home/myapp
 COPY ./requirements.txt /home/myapp/
 RUN pip install -r requirements.txt
-COPY ./worker1.py /home/myapp/
-COPY ./producer.py /home/myapp/
+COPY ./consumer.py /home/myapp/
+COPY ./callback.py /home/myapp/
 COPY ./database.py /home/myapp/
-CMD ["python","-u", "/home/myapp/worker1.py"]
+COPY ./router_client.py /home/myapp/
+CMD ["python","-u", "/home/myapp/consumer.py"]

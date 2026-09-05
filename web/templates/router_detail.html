@@ -20,7 +20,7 @@
         </thead>
         <tbody>
             {% for doc in history %}
-                {% for intf in doc.result %}
+                {% for intf in doc.interfaces %}
                 <tr>
                     <td>{{ doc.timestamp }}</td>
                     <td>{{ intf.interface }}</td>
