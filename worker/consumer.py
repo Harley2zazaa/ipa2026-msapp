@@ -2,8 +2,10 @@ import os, time, pika
 
 from callback import callback
 
-user = os.getenv("RABBITMQ_DEFAULT_USER")
-pwd  = os.getenv("RABBITMQ_DEFAULT_PASS")
+# user = os.getenv("RABBITMQ_DEFAULT_USER")
+# pwd  = os.getenv("RABBITMQ_DEFAULT_PASS")
+user = "admin"
+pwd  = "rabbitmq"
 
 
 def consume(host):
