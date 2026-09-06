@@ -7,9 +7,11 @@ app = Flask(__name__)
 
 data = []
 
+
 @app.route("/")
 def main():
     return render_template("index.html", data=data)
+
 
 @app.route("/add", methods=["POST"])
 def add_comment():
@@ -19,6 +21,7 @@ def add_comment():
     if yourname and message:
         data.append({"yourname": yourname, "message": message})
     return redirect("/")
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)

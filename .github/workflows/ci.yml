@@ -18,8 +18,7 @@ jobs:
         python-version: 3.12.3
 
     - name: Install Lint & Format Tools
-      run: |
-        pip install flake8 black
+      run: pip install flake8 black
 
     - name: Run flake8 (Lint)
       run: flake8 .
