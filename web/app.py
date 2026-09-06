@@ -52,11 +52,7 @@ def delete_comment():
 
 @app.route("/router/<ip>")
 def router_detail(ip):
-    history = list(
-        status_col.find({"router_ip": ip})
-        .sort("timestamp", -1)
-        .limit(5)
-    )
+    history = list(status_col.find({"router_ip": ip}).sort("timestamp", -1).limit(5))
     return render_template("router_detail.html", ip=ip, history=history)
 
 
