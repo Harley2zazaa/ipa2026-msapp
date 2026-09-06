@@ -68,6 +68,8 @@ services:
       RABBITMQ_HOST: "rabbitmq"
       RABBITMQ_DEFAULT_USER: "${RABBITMQ_DEFAULT_USER}"
       RABBITMQ_DEFAULT_PASS: "${RABBITMQ_DEFAULT_PASS}"
+    deploy:
+      replicas: 3
   # worker:
   #   build: ./worker
   #   depends_on:
